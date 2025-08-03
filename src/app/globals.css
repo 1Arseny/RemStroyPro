@@ -1,0 +1,40 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #242223;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+img{
+  user-select: none;
+  pointer-events: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+#calculator{
+  display: flex;
+  width: 30%;
+  justify-content: center;
+}
+@media (max-width: 1300px) {
+  #calculator {
+    min-width: 70%;
+    height: 50%;
+  }
+}
+@media (max-width: 600px) {
+  #calculator {
+    width: 98%;
+  }
+}
