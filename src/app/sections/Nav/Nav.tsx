@@ -37,7 +37,7 @@ function Nav({activeSection}: NavProps) {
     };
 
     const navItems = [
-        { id: 'krutorus', label: 'РемСтройПро' },
+        { id: 'krutorus', label: 'Главная' },
         { id: 'calculator', label: 'Калькулятор' },
         { id: 'services', label: 'Услуги' },
         { id: 'plan', label: 'Разработка проектов' },
@@ -50,10 +50,13 @@ function Nav({activeSection}: NavProps) {
             <div className={styles.buttons}>
                 {isMobile ? (
                     <>
-                        <div className={styles.hamburger} onClick={toggleMenu}>
-                            <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
-                            <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
-                            <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
+                        <div className={styles.hamburgerRow}>
+                            <span className={styles.mobileBrand}>РемСтройПро</span>
+                            <div className={styles.hamburger} onClick={toggleMenu}>
+                                <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
+                                <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
+                                <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
+                            </div>
                         </div>
                         <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
                             {navItems.map(item => (

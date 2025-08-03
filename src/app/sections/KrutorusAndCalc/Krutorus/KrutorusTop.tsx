@@ -41,11 +41,13 @@ function KrutorusTop() {
             </Head>
             <div className={styles.inner}>
                 <h1 className={styles.title}>РемСтройПро</h1>
-                <ul className={styles.list}>
-                    <li>—Реализуем проекты любой сложности: от косметического ремонта до капитального строительства.</li>
-                    <li>—Работаем по прозрачным условиям, соблюдая сроки и бюджет.</li>
-                    <li>—Индивидуальный подход к каждому заказчику — от идеи до воплощения.</li>
-                </ul>
+                <div className={styles.listWrapper}>
+                    <ul className={`${styles.list} ${styles.animatedList}`}>
+                        <li>🧱 <b>Проекты любой сложности:</b> от косметического до капитального ремонта.</li>
+                        <li>📊 <b>Прозрачные условия,</b> соблюдение сроков и бюджета.</li>
+                        <li>🎯 <b>Индивидуальный подход</b> — от идеи до воплощения.</li>
+                    </ul>
+                </div>
                 <div className={styles.fields}>
                     {/* Первая строка - ремонт */}
                     <div className={styles.row}>
@@ -54,7 +56,7 @@ function KrutorusTop() {
                             className={styles.anchorLink}
                             onClick={(e) => scrollToAnchor(e, '#services')}
                         >
-                            <Field className={'orangeTop'}>Ремонт</Field>
+                            <Field className={'orangeTop'}>Ремонт от 3 000 ₽/м²</Field>
                         </a>
                         <div className={styles.marquee}>
                             <div className={styles.marqueeContent}>
@@ -80,7 +82,7 @@ function KrutorusTop() {
                             className={styles.anchorLink}
                             onClick={(e) => scrollToAnchor(e, '#services')}
                         >
-                            <Field className={'orangeTop'}>Стройка</Field>
+                            <Field className={'orangeTop'}>Стройка от 7 990 ₽/м²</Field>
                         </a>
                         <div className={styles.marquee}>
                             <div className={styles.marqueeContent}>
@@ -108,7 +110,7 @@ function KrutorusTop() {
                             className={styles.anchorLink}
                             onClick={(e) => scrollToAnchor(e, '#plan')}
                         >
-                            <Field className={'orangeTop'}>Разработка проектов</Field>
+                            <Field className={'orangeTop'}>Разработка проектов от 1 000 ₽/м²</Field>
                         </a>
                         <div className={styles.shineContainer}>
                             <div className={styles.staticFields}>
