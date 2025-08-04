@@ -24,7 +24,7 @@ img{
 }
 #calculator{
   display: flex;
-  /* width: 30%; */
+  width: 30%;
   justify-content: center;
 }
 @media (max-width: 1300px) {
