@@ -46,7 +46,7 @@ function KrutorusBottom() {
                             ref={orangeRef}
                             className={inView ? styles.animateLeft : ''}
                         >
-                            <Field className={'transparentOrange'}>
+                            <Field className={'transparentOrange compact'}>
                                 Есть вопросы или нужна помощь с выбором услуги?
                             </Field>
                         </div>
@@ -54,7 +54,7 @@ function KrutorusBottom() {
                             ref={grayRef}
                             className={inView ? styles.animateRight : ''}
                         >
-                            <Field className={'transparentGray'}>
+                            <Field className={'transparentGray compact'}>
                                 - Да, хочу уточнить пару моментов.<br />
                                 <Link className={styles.link} href="/">
                                     📲 <span className={styles.linkDecoration}>Пишите в Telegram — ответим быстро!</span>
@@ -62,12 +62,11 @@ function KrutorusBottom() {
                             </Field>
                         </div>
                     </div>
-
                     <Image
-  className={`${styles.arrowLeft} ${inView ? styles.animateDrawArrow : ''}`}
-  src={arrowLeft}
-  alt='arrow'
-/>
+                        className={`${styles.arrowLeft} ${inView ? styles.animateDrawArrow : ''}`}
+                        src={arrowLeft}
+                        alt='arrow'
+                    />
                     <div className={styles.tgbtn}>
                         <TelegramBlueButton />
                     </div>

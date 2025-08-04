@@ -8,11 +8,19 @@
     font-weight: 400;
     height: 400px;
     width: 100%;
+    max-width: 1360px;
+    margin: 2rem auto 0 auto;
+    padding: 0 2rem;
     margin-top: 2rem;
+}
+@media (max-width: 768px) {
+  .krutorusBottom {
+    padding: 0 1rem;
+  }
 }
 .images{
     display: flex;
-    width: 100%;
+    width: 25%;
     position: relative;
     z-index: 5;
     pointer-events: none;
@@ -28,14 +36,15 @@
 }
 .cloud{
     position: absolute;
-    top: -40px;
-    left: calc(440px - 170px);
+    top: -70px;
+    left: calc(400px - 170px);
 }
 .fieldsAndButton {
     position: relative;
     z-index: 5;
     align-self: center;
     justify-self: flex-end;
+    width: 64%;
 }
 .fieldsOpacity{
     max-width: 400px;
@@ -46,17 +55,19 @@
     flex-direction: column;
     align-items: flex-start;
     position: relative;
+    transition: opacity 0.5s ease;
 }
 .fields{
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 30px;
-    margin: 60px;
+    /* margin: 60px; */
 }
 .arrowLeft{
     position: absolute;
-    right: 30px;
-    bottom: 50px;
+    right: 0;
+    bottom: -20;
     user-select: none;
     transition: none;
 }
@@ -68,12 +79,12 @@
 .stone1{
     position: absolute;
     z-index: 0;
-    bottom: 60px;
-    right: -130px;
+    bottom: -120px;
+    right: -65px;
     filter: blur(5px);
 }
 .tgbtn{
-    margin-left: 171px;
+    margin-left: 520px;
 }
 .link{
     color: white;
@@ -144,9 +155,13 @@
 @media (max-width: 580px) {
     .krutorusBottom {
         height: auto;
-        padding: 20px;
+        padding: 0 20px 0 20px;
         flex-direction: column;
         border: none;
+        margin: 0;
+    }
+    .fieldsAndButton{
+        width: 100%;
     }
     .fields {
         display: flex;

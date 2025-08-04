@@ -24,17 +24,22 @@ img{
 }
 #calculator{
   display: flex;
-  width: 30%;
   justify-content: center;
+  width: 100%;
+  max-width: 420px;
+  min-height: 400px;
+  margin: 0 auto;
 }
-@media (max-width: 1300px) {
+@media (min-width: 1024px) {
   #calculator {
-    min-width: 70%;
-    height: 50%;
+    width: 55%;
+    max-width: none;
   }
 }
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
   #calculator {
-    width: 98%;
+    width: 100%;
+    padding: 0 1rem;
   }
 }

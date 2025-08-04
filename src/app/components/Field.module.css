@@ -173,6 +173,9 @@
         white-space: wrap;
         padding: 30px;
     }
+    .compact{
+        padding: 12px 10px;
+    }
     .transparentOrangePrice{
         padding: 10px 10px;
         height: auto;
