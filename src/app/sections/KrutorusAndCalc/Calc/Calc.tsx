@@ -1,9 +1,10 @@
 'use client';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useState, useRef} from 'react';
 import styles from './Calc.module.css';
 import Image from "next/image";
 import tg from 'public/tg.svg'
 import mail from 'public/mail.svg'
+import phoneIcon from 'public/phone-icon.svg'
 import Link from "next/link";
 import {createPortal} from "react-dom";
 import arrowSig from 'public/arrowZig.png'
@@ -216,6 +217,32 @@ export default function Calc() {
         return new Intl.NumberFormat('ru-RU').format(price) + ' руб.';
     };
 
+    // Телефон логика
+    const [showDropdown, setShowDropdown] = useState(false);
+    const iconRef = useRef<HTMLDivElement | null>(null)
+
+
+    const phoneNumbers = [
+        { name: 'Сергей', number: '+7 (999) 981-71-29' },
+        { name: 'Алексей', number: '+7 (916) 265-50-90' },
+    ];
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+            if (iconRef.current && !iconRef.current.contains(event.target as Node)) {
+            setShowDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
+        }, []);
+
     const renderModal = () => {
         const isRepair = serviceType === 'repair';
         const isBuilding = serviceType === 'building';
@@ -370,6 +397,38 @@ export default function Calc() {
         setName('');
         setPhone('');
     };
+    // таймер 2 мин 
+    const [timer, setTimer] = useState(120); // 2 минуты
+    const [timerExpired, setTimerExpired] = useState(false);
+
+
+    useEffect(() => {
+        if (step === 0 && timer > 0) {
+            const interval = setInterval(() => {
+                setTimer(prev => prev - 1);
+            }, 1000);
+
+            return () => clearInterval(interval);
+        }
+        if (timer === 0) {
+            // Например: скрыть скидку или показать сообщение
+            console.log('Время вышло');
+        }
+    }, [step, timer]);
+
+    const formatTime = (seconds: number) => {
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    };
+
+    useEffect(() => {
+        if (timer === 0) {
+            setTimerExpired(true); // Скрыть таймер и скидку
+        }
+    }, [timer]);
+
+
 
     return (
         <section className={styles.calcSection}>
@@ -410,8 +469,16 @@ export default function Calc() {
                                 </button>
                             </div>
 
-                            <p className={styles.discount}><span className={styles.underline}>Скидка</span> <span
-                                className={styles.orange}>15%</span> для Вас на первый замер!</p>
+                            {!timerExpired && (
+                                <p className={styles.discount}>
+                                    <span className={styles.underline}>Скидка</span> <span className={styles.orange}>15%</span> для Вас на первый замер!
+                                </p>
+                            )}
+                            {!timerExpired && (
+                                <p className={styles.timer}>
+                                    {formatTime(timer)}
+                                </p>
+                            )}
                         </div>
                         <p className={styles.footer}>Заполните за 30 секунд — без регистрации и звонков</p>
                     </div>
@@ -804,6 +871,23 @@ export default function Calc() {
                 )}
             </section>
             <div className={styles.images}>
+                {/* Телефон */}
+                <div
+                    className={styles.iconWrapper}
+                    onClick={() => setShowDropdown(!showDropdown)}
+                    ref={iconRef}
+                >
+                    <Image src={phoneIcon} alt="phone" width={40} height={40} priority/>
+                    {showDropdown && (
+                        <div className={styles.dropdown}>
+                        {phoneNumbers.map((item, i) => (
+                            <a key={i} href={`tel:${item.number.replace(/[^0-9+]/g, '')}`}>
+                                {item.name}: {item.number}
+                            </a>
+                        ))}
+                        </div>
+                    )}
+                </div>
                 <Link href={'https://t.me/BuildConsultBot?start=GrayUnderCalc'}
                       className={styles.iconLink}><Image src={tg} alt="telegram" width={40}
                                                          height={40} priority/></Link>
