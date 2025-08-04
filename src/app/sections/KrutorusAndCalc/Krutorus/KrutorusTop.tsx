@@ -1,6 +1,7 @@
 'use client';
 import Head from 'next/head';
-import styles from './KrutorusTop.module.css'
+import styles from './KrutorusTop.module.css';
+import stylesField from './Field.module.css';
 import Field from "@/app/components/Field";
 import {useEffect, useRef} from 'react';
 
@@ -17,17 +18,6 @@ function KrutorusTop() {
             });
         }
     };
-
-    useEffect(() => {
-        if (shineRef.current) {
-            shineRef.current.style.animation = 'none';
-            setTimeout(() => {
-                if (shineRef.current) {
-                    shineRef.current.style.animation = '';
-                }
-            }, 10);
-        }
-    }, []);
 
     return (
         <div className={styles.krutorusTop}>
@@ -50,13 +40,16 @@ function KrutorusTop() {
                 </div>
                 <div className={styles.fields}>
                     {/* Первая строка - ремонт */}
-                    <div className={styles.row}>
+                    <ul className={`${styles.callList} ${styles.noTopMargin}`}>
+                        <li>Нужен ремонт? Сделаем! Созвонимся через 15 мин?</li>
+                    </ul>
+                    <div className={`${styles.row} ${styles.animatedRow}`}>
                         <a
                             href="#services"
                             className={styles.anchorLink}
                             onClick={(e) => scrollToAnchor(e, '#services')}
                         >
-                            <Field className={'orangeTop'}>Ремонт от 3 000 ₽/м²</Field>
+                            <Field className={'orangeTop orangeDelay1'}>Ремонт от 3 000 ₽/м²</Field>
                         </a>
                         <div className={styles.marquee}>
                             <div className={styles.marqueeContent}>
@@ -76,13 +69,16 @@ function KrutorusTop() {
                     </div>
 
                     {/* Вторая строка - стройка */}
-                    <div className={styles.row}>
+                    <ul className={styles.callList}>
+                        <li>Подготовили для Вас спектор наших возможностей!</li>
+                    </ul>
+                    <div className={`${styles.row} ${styles.animatedRow}`}>
                         <a
                             href="#services"
                             className={styles.anchorLink}
                             onClick={(e) => scrollToAnchor(e, '#services')}
                         >
-                            <Field className={'orangeTop'}>Стройка от 7 990 ₽/м²</Field>
+                            <Field className={'orangeTop orangeDelay2'}>Строительство от 7 990 ₽/м²</Field>
                         </a>
                         <div className={styles.marquee}>
                             <div className={styles.marqueeContent}>
@@ -104,18 +100,25 @@ function KrutorusTop() {
                     </div>
 
                     {/* Третья строка - разработка проектов */}
-                    <div className={styles.row}>
+                    <ul className={styles.callList}>
+                        <li>Нужен проект? Закажите его у нас!</li>
+                    </ul>
+                    <div className={`${styles.row} ${styles.animatedRow}`}>
                         <a
                             href="#plan"
                             className={styles.anchorLink}
                             onClick={(e) => scrollToAnchor(e, '#plan')}
                         >
-                            <Field className={'orangeTop'}>Разработка проектов от 1 000 ₽/м²</Field>
+                            <Field className={'orangeTop orangeDelay1' } >Разработка проектов от 1 000 ₽</Field>
                         </a>
                         <div className={styles.shineContainer}>
                             <div className={styles.staticFields}>
-                                <Field className={'gray'}>Перепланировки</Field>
-                                <Field className={'gray'}>Дизайны</Field>
+                                <div className={styles.shinyButton}>
+                                    <Field className={'gray'}>Перепланировки</Field>
+                                </div>
+                                <div className={styles.shinyButton}>
+                                    <Field className={'gray'}>Дизайны</Field>
+                                </div>
                             </div>
                             <div ref={shineRef} className={styles.shine}></div>
                         </div>

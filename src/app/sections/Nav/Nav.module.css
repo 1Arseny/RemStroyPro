@@ -23,6 +23,11 @@
     height: 100%;
     width: 90%;
 }
+@media screen and (min-width: 1301px) {
+    .buttons button{
+        font-size: 18px;
+    }
+}
 .hamburgerRow {
     display: flex;
     justify-content: space-between;
@@ -107,19 +112,19 @@
 }
 
 .mobileMenu {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     background: rgba(100, 100, 100, 0.5);
-        backdrop-filter: blur(10px);  
+    backdrop-filter: blur(10px);
     border-radius: 0 0 25px 25px;
-    padding: 20px;
-    display: none;
-    flex-direction: column;
-    gap: 15px;
     z-index: 9;
-    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 }
 
 .mobileMenu.open {
@@ -189,4 +194,19 @@
     .mobileButton {
         font-size: 14px;
     }
+}
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navAnimate {
+  animation: fadeSlideIn 0.8s ease-out forwards;
+  opacity: 0; 
 }

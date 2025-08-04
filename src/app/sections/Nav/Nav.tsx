@@ -1,39 +1,43 @@
-'use client'
-import styles from './Nav.module.css'
-import {Button} from "@/app/components/Button";
-import {useEffect, useState} from 'react';
+'use client';
+import styles from './Nav.module.css';
+import { Button } from "@/app/components/Button";
+import { useEffect, useState } from 'react';
 
 interface NavProps {
     activeSection: string;
 }
 
-function Nav({activeSection}: NavProps) {
+function Nav({ activeSection }: NavProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
-
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({behavior: 'smooth', block: 'start'});
-            setIsMenuOpen(false);
-        }
-    };
+    const [isReady, setIsReady] = useState(false); // 🆕
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 700);
-            if (window.innerWidth >= 700) {
+            const mobile = window.innerWidth < 700;
+            setIsMobile(mobile);
+            if (!mobile) {
                 setIsMenuOpen(false);
             }
         };
 
-        handleResize();
+        handleResize(); // Первичная установка
+        setIsReady(true); // ✅ После первого определения — разрешаем рендер
+
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+        setIsMenuOpen(prev => !prev);
+    };
+
+    const scrollToSection = (id: string) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setIsMenuOpen(false);
+        }
     };
 
     const navItems = [
@@ -45,45 +49,49 @@ function Nav({activeSection}: NavProps) {
         { id: 'aboutus', label: 'О нас' }
     ];
 
+    // 🔐 До инициализации — ничего не показываем
+    if (!isReady) return null;
+
     return (
-        <nav className={`${styles.nav} ${isMobile ? styles.mobileNav : ''}`}>
-            <div className={styles.buttons}>
-                {isMobile ? (
-                    <>
-                        <div className={styles.hamburgerRow}>
-                            <span className={styles.mobileBrand}>РемСтройПро</span>
-                            <div className={styles.hamburger} onClick={toggleMenu}>
-                                <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
-                                <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
-                                <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
-                            </div>
+    <nav className={`${styles.nav} ${isMobile ? styles.mobileNav : ''} ${styles.navAnimate}`}>
+        <div className={styles.buttons}>
+            {isMobile ? (
+                <>
+                    <div className={styles.hamburgerRow}>
+                        <span className={styles.mobileBrand}>РемСтройПро</span>
+                        <div className={styles.hamburger} onClick={toggleMenu}>
+                            <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
+                            <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
+                            <div className={`${styles.hamburgerLine} ${isMenuOpen ? styles.open : ''}`}></div>
                         </div>
-                        <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
-                            {navItems.map(item => (
-                                <Button
-                                    key={item.id}
-                                    pressed={activeSection === item.id}
-                                    onClick={() => scrollToSection(item.id)}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </div>
-                    </>
-                ) : (
-                    navItems.map(item => (
-                        <Button
-                            key={item.id}
-                            pressed={activeSection === item.id}
-                            onClick={() => scrollToSection(item.id)}
-                        >
-                            {item.label}
-                        </Button>
-                    ))
-                )}
-            </div>
-        </nav>
-    );
+                    </div>
+                    <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
+                        {navItems.map(item => (
+                            <Button
+                                key={item.id}
+                                pressed={activeSection === item.id}
+                                onClick={() => scrollToSection(item.id)}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </div>
+                </>
+            ) : (
+                navItems.map(item => (
+                    <Button
+                        key={item.id}
+                        pressed={activeSection === item.id}
+                        onClick={() => scrollToSection(item.id)}
+                    >
+                        {item.label}
+                    </Button>
+                ))
+            )}
+        </div>
+    </nav>
+);
+
 }
 
 export default Nav;

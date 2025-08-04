@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useRef, useState } from 'react';
 import styles from './KrutorusBottom.module.css'
 import Image from "next/image";
 import BuilderImage from "public/man.png"
@@ -9,30 +10,71 @@ import Field from "@/app/components/Field";
 import Link from "next/link";
 import TelegramBlueButton from "@/app/components/TelegramBlueButton";
 
-
 function KrutorusBottom() {
+    const orangeRef = useRef<HTMLDivElement>(null);
+    const grayRef = useRef<HTMLDivElement>(null);
+    const [inView, setInView] = useState(false);
+
+    useEffect(() => {
+        const element = orangeRef.current;
+        const observer = new IntersectionObserver(
+            ([entry]) => setInView(entry.isIntersecting),
+            { threshold: 0.3 }
+        );
+
+        if (element) {
+            observer.observe(element);
+        }
+
+        return () => {
+            if (element) {
+            observer.unobserve(element);
+            }
+        };
+    }, []);
+
     return (
         <div className={styles.krutorusBottom}>
             <div className={styles.images}>
-                <Image className={styles.man} src={BuilderImage} alt="строитель" height={456}/>
-                <Image className={styles.cloud} src={CloudImage} alt="Узнайте стоимость любой работы!" height={126}/>
+                <Image className={styles.man} src={BuilderImage} alt="строитель" height={456} />
+                <Image className={styles.cloud} src={CloudImage} alt="Узнайте стоимость любой работы!" height={126} />
             </div>
             <div className={styles.fieldsAndButton}>
                 <div className={styles.fields}>
                     <div className={styles.fieldsOpacity}>
-                        <Field className={'transparentOrange'}>Есть вопросы или нужна помощь с выбором услуги?</Field>
-                        <Field className={'transparentGray'}>- Да, хочу уточнить пару моментов.<br/>
-                            <Link className={styles.link} href="/">📲<span className={styles.linkDecoration}>Пишите в Telegram — ответим быстро!</span></Link>
-                        </Field>
+                        <div
+                            ref={orangeRef}
+                            className={inView ? styles.animateLeft : ''}
+                        >
+                            <Field className={'transparentOrange'}>
+                                Есть вопросы или нужна помощь с выбором услуги?
+                            </Field>
+                        </div>
+                        <div
+                            ref={grayRef}
+                            className={inView ? styles.animateRight : ''}
+                        >
+                            <Field className={'transparentGray'}>
+                                - Да, хочу уточнить пару моментов.<br />
+                                <Link className={styles.link} href="/">
+                                    📲 <span className={styles.linkDecoration}>Пишите в Telegram — ответим быстро!</span>
+                                </Link>
+                            </Field>
+                        </div>
                     </div>
-                    <Image className={styles.arrowLeft} src={arrowLeft} alt='arrow'/>
+
+                    <Image
+  className={`${styles.arrowLeft} ${inView ? styles.animateDrawArrow : ''}`}
+  src={arrowLeft}
+  alt='arrow'
+/>
                     <div className={styles.tgbtn}>
-                        <TelegramBlueButton/>
+                        <TelegramBlueButton />
                     </div>
                 </div>
             </div>
             <div className={styles.imagestone}>
-                <Image className={styles.stone1} src={stone1} alt='stone1'/>
+                <Image className={styles.stone1} src={stone1} alt='stone1' />
             </div>
         </div>
     );

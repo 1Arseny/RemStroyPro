@@ -38,6 +38,8 @@
     justify-self: flex-end;
 }
 .fieldsOpacity{
+    max-width: 400px;
+    width: 100%;
     opacity: 60%;
     display: flex;
     gap: 30px;
@@ -56,6 +58,7 @@
     right: 30px;
     bottom: 50px;
     user-select: none;
+    transition: none;
 }
 .imagestone{
     position: relative;
@@ -184,4 +187,53 @@
     .linkDecoration {
         font-size: 14px;
     }
+}
+@keyframes slideLeftFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRightFade {
+  0% {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animateLeft {
+  animation: slideLeftFade 1s ease-out forwards;
+}
+
+.animateRight {
+  animation: slideRightFade 2s ease-out forwards;
+}
+@keyframes drawArrow {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.1) translateY(-20px);
+  }
+  60% {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+  75% {
+    transform: scaleY(1) translateY(-6px);
+  }
+  100% {
+    transform: scaleY(1) translateY(0);
+  }
+}
+.animateDrawArrow {
+  animation: drawArrow 2s ease-out forwards;
+  transform-origin: top center;
 }

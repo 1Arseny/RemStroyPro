@@ -52,7 +52,7 @@
 }
 
 .title {
-    font-size: 61px;
+    font-size: 42px;
     font-weight: 600;
     margin-bottom: 20px;
     
@@ -73,7 +73,7 @@
     max-width: 100%;
     list-style: none;
     margin-bottom: 30px;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 30px;
     font-weight: 400;
     white-space: wrap;
@@ -88,9 +88,9 @@
     .list li{
         text-align: center;
         font-size: 15px;
-        border-left: 4px solid #f4871a32;
-        border-right: 4px solid #f4871a32;
-        background: rgba(255, 255, 255, 0.03);
+        border-left: 4px solid #f4871a59;
+        border-right: 4px solid #f4871a59;
+        background: rgba(255, 255, 255, 0.077);
         border-radius: 6px;
         font-size: 14px;
     }
@@ -107,8 +107,8 @@
 
   .animatedList li {
     opacity: 0;
-    transform: translateY(15px);
-    animation: fadeInUp 1.5s ease forwards;
+    transform: translateY(20px);
+    animation: fadeInUp 4s ease forwards;
   }
 
   .animatedList li:nth-child(1) {
@@ -157,22 +157,6 @@
     z-index: 2;
 }
 
-.shine {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-            to right,
-            transparent 0%,
-            rgba(255, 255, 255, 0.4) 50%,
-            transparent 100%
-    );
-    z-index: 3;
-    animation: shine 3s forwards;
-}
-
 @keyframes shine {
     0% { left: -100%; }
     100% { left: 100%; }
@@ -190,7 +174,7 @@
     }
 
     .title {
-        font-size: 48px;
+        font-size: 42px;
     }
 
     .list {
@@ -259,7 +243,7 @@
     }
 
     .title {
-        font-size: 28px;
+        font-size: 32px;
         margin-bottom: 10px;
     }
 
@@ -269,4 +253,121 @@
         margin-bottom: 12px;
     }
     
+}
+@keyframes rowFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animatedRow {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rowFadeInUp 0.6s ease-out forwards;
+}
+
+.animatedRow:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.animatedRow:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.animatedRow:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.shinyButton {
+  position: relative;
+  overflow: hidden;
+  border-radius:30px ;
+}
+
+.shinyButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shineLocal 3s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes shineLocal {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+.callList {
+  list-style: none;
+  margin: 20px 0 10px 0;
+  padding: 0 0 0 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 16px; /* ⬅ ПК */
+  line-height: 1.4;
+}
+.noTopMargin {
+  margin-top: 0 !important;
+}
+.callList li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.callList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  background-color: #F4871A;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(244, 135, 26, 0.7);
+}
+
+/* 📱 Мобильные устройства */
+@media (max-width: 700px) {
+  .callList {
+    font-size: 16px;
+    padding-left: 15px;
+  }
+
+  .callList li::before {
+    top: 7px;
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* 📱 Очень маленькие экраны */
+@media (max-width: 400px) {
+  .callList {
+    font-size: 15px;
+    padding-left: 12px;
+  }
+
+  .callList li::before {
+    top: 7px;
+    width: 7px;
+    height: 7px;
+  }
 }

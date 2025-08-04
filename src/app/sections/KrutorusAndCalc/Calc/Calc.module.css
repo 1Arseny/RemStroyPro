@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     height: auto;
-    min-height: 500px;
+    min-height: 600px;
+    max-height: 725px;
     gap: 30px;
     border-radius: 50px;
     border: none;
@@ -805,7 +806,7 @@
     .calcSection {
         height: 90vh;
         min-height: 700px;
-        margin-bottom: 15rem;
+        /* margin-bottom: 15rem; */
     }
 
     .calc {
