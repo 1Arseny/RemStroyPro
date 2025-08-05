@@ -142,6 +142,7 @@
     align-items: center;
     position: relative;
     padding: 20px 0;
+    z-index: 9;
 }
 .arrow{
     display: none;
@@ -906,18 +907,18 @@
 }
 
 @media (max-height: 700px) {
-    .calcSection {
-        /* height: auto; */
+    /* .calcSection {
+        height: auto;
         min-height: 100vh;
     }
 
     .calc {
-        /* min-height: 100vh; */
+        min-height: 100vh;
     }
 
     .stepContent, .stepContent4 {
-        /* min-height: 100vh; */
-    }
+        min-height: 100vh;
+    } */
 
     .center, .center1 {
         margin-top: 0;
