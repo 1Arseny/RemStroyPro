@@ -58,8 +58,8 @@ export const metadata: Metadata = {
         telephone: true, // Включение обнаружения телефонных номеров
     },
     verification: {
-        google: "google-site-verification-code", // Код верификации Google
-        yandex: "yandex-verification-code", // Код верификации Yandex
+        google: "KIcUFiXcnsCeWQmFNvD5b5HyrTyclTIhH_ar4WumjVw", // Код верификации Google
+        yandex: "5f955619b1e94acb", // Код верификации Yandex
     },
 };
 
