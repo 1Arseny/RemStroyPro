@@ -3,6 +3,8 @@
 import {useEffect, useRef, useState} from 'react';
 import styles from './Completed.module.css';
 import Image from 'next/image';
+import ImageModal from './ImageModal'; // путь может быть другим, укажи свой
+
 
 const mediaFiles = [
     '/works/1.webp',
@@ -336,10 +338,12 @@ export default function Completed() {
         animationRef.current = requestAnimationFrame(inertiaAnimate);
     };
 
-    const openInNewWindow = (src: string) => {
+    const [modalImage, setModalImage] = useState<string | null>(null);
+    const openModalImage = (src: string) => {
         if (!clickAllowedRef.current) return;
-        window.open(src, '_blank', 'noopener,noreferrer');
+        setModalImage(src);
     };
+
 
     return (
         <div
@@ -354,7 +358,7 @@ export default function Completed() {
                         <div
                             key={`${index}-${src}`}
                             className={styles.imageContainer}
-                            onClick={() => openInNewWindow(src)}
+                            onClick={() => openModalImage(src)}
                         >
                             <Image
                                 src={src}
@@ -375,6 +379,13 @@ export default function Completed() {
                     ))}
                 </div>
             </div>
+            {modalImage && (
+                <ImageModal
+                    isOpen={true}
+                    src={modalImage}
+                    onClose={() => setModalImage(null)}
+                />
+            )}
         </div>
     );
 }

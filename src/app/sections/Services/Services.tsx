@@ -357,11 +357,10 @@ export default function Services() {
                             onTouchEnd={handleTouchEnd}
                         >
                             <div
-  className={`${styles.card} ${styles.mobileActive} ${animationClass}`}
-  onAnimationEnd={() => setAnimationClass('')}
-  style={{width: '85%'}}
->
-
+                                className={`${styles.card} ${styles.mobileActive} ${animationClass}`}
+                                onAnimationEnd={() => setAnimationClass('')}
+                                style={{width: '85%'}}
+                            >
                                 <div className={styles.cardContent}
                                      style={typeof cards[currentSlide].price === "string" ? {overflowY: 'auto'} : {}}>
                                     <div className={styles.titlePrice}>

@@ -25,7 +25,7 @@ function ServiceButton({ setActiveTab }: { setActiveTab: (tab: 'repair' | 'const
                 Ремонт квартир
             </button>
             <button className={styles.button} onClick={() => handleTabChange('construction')}>
-                Стройка
+                Строительство
             </button>
         </div>
     );
