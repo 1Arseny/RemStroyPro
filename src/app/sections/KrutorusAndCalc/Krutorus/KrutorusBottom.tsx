@@ -16,22 +16,26 @@ function KrutorusBottom() {
     const [inView, setInView] = useState(false);
 
     useEffect(() => {
-        const element = orangeRef.current;
-        const observer = new IntersectionObserver(
-            ([entry]) => setInView(entry.isIntersecting),
-            { threshold: 0.3 }
-        );
+    const element = orangeRef.current;
+    if (!element) return;
 
-        if (element) {
-            observer.observe(element);
-        }
-
-        return () => {
-            if (element) {
-            observer.unobserve(element);
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                setInView(true);
+                observer.disconnect(); // ⛔ Остановим наблюдение после первого входа
             }
-        };
-    }, []);
+        },
+        { threshold: 0.3 }
+    );
+
+    observer.observe(element);
+
+    return () => {
+        observer.disconnect();
+    };
+}, []);
+
 
     return (
         <div className={styles.krutorusBottom}>
@@ -57,7 +61,7 @@ function KrutorusBottom() {
                             <Field className={'transparentGray compact'}>
                                 - Да, хочу уточнить пару моментов.<br />
                                 <Link className={styles.link} href="/">
-                                    📲 <span className={styles.linkDecoration}>Пишите в Telegram — ответим быстро!</span>
+                                    📲 <span className={styles.linkDecoration}>Пишите в Telegram — ответим в течении 15 минут!</span>
                                 </Link>
                             </Field>
                         </div>

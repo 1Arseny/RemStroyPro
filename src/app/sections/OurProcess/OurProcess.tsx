@@ -7,12 +7,12 @@ import TitleH2 from "@/app/components/TitleH2";
 
 function OurProcess() {
     const [activeIndex, setActiveIndex] = useState(0)
-    const fields = ['Заявка', 'Замер', 'Эскиз', 'Утверждение', 'Рабочая документация']
+    const fields = ['Заявка', 'Замер', 'Эскиз', 'Утверждение', 'Рабочая документация', 'Проектная документация']
 
     useEffect(() => {
         const interval = setInterval(() => {
             setActiveIndex(prev => (prev >= fields.length - 1 ? -1 : prev + 1))
-        }, 3700)
+        }, 2100)
 
         return () => clearInterval(interval)
     }, [fields.length])

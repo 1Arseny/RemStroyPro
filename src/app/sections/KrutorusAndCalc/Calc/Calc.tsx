@@ -471,7 +471,8 @@ export default function Calc() {
 
                             {!timerExpired && (
                                 <p className={styles.discount}>
-                                    <span className={styles.underline}>Скидка</span> <span className={styles.orange}>15%</span> для Вас на первый замер!
+                                    <span className={styles.underline}>Скидка</span> <span className={styles.orange}>15%</span> для Вас на первый замер! Получите её <span className={styles.orange}>после</span> расчёта.
+                        
                                 </p>
                             )}
                             {!timerExpired && (
