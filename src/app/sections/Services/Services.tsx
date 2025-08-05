@@ -141,13 +141,43 @@ export default function Services() {
         setActiveBg('bg1');
     }, [activeTab]);
 
+    const [hasAnimatedOnce, setHasAnimatedOnce] = useState(false);
+
+    useEffect(() => {
+        if (!hasAnimatedOnce) {
+            triggerAnimation('left');
+            setHasAnimatedOnce(true);
+        }
+    }, [hasAnimatedOnce]);
+
+
     const nextSlide = () => {
-        setCurrentSlide(prev => (prev + 1) % cards.length);
+        triggerAnimation('left', () => {
+            setCurrentSlide(prev => (prev + 1) % cards.length);
+        });
     };
 
     const prevSlide = () => {
-        setCurrentSlide(prev => (prev - 1 + cards.length) % cards.length);
+        triggerAnimation('right', () => {
+            setCurrentSlide(prev => (prev - 1 + cards.length) % cards.length);
+        });
     };
+
+
+    const triggerAnimation = (direction: 'left' | 'right', callback?: () => void) => {
+        setAnimationClass('');
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                setAnimationClass(direction === 'left' ? styles.slideLeft : styles.slideRight);
+
+                // Задержка, чтобы дать времени на проигрывание анимации
+                setTimeout(() => {
+                    callback?.();
+                }, 10); // 👈 Этого достаточно (анимация начнёт проигрываться, и потом обновим слайд)
+            });
+        });
+    };
+
 
     const handleCardClick = (index: number) => {
         const slideIndex = (index - currentSlide + cards.length) % cards.length;
@@ -177,6 +207,7 @@ export default function Services() {
         };
     };
 
+    const [animationClass, setAnimationClass] = useState('');
     const handleTouchEnd = () => {
         // Рассчитываем разницу перемещения
         const diffX = touchEndRef.current.x - touchStartRef.current.x;
@@ -185,9 +216,11 @@ export default function Services() {
         // Проверяем, что движение в основном горизонтальное
         if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
             if (diffX > 0) {
-                prevSlide(); // Свайп вправо -> предыдущий слайд
+                triggerAnimation('right');
+                prevSlide();
             } else {
-                nextSlide(); // Свайп влево -> следующий слайд
+                triggerAnimation('left');
+                nextSlide();
             }
         }
     };
@@ -323,7 +356,12 @@ export default function Services() {
                             onTouchMove={handleTouchMove}
                             onTouchEnd={handleTouchEnd}
                         >
-                            <div className={`${styles.card} ${styles.mobileActive}`} style={{width: '85%'}}>
+                            <div
+  className={`${styles.card} ${styles.mobileActive} ${animationClass}`}
+  onAnimationEnd={() => setAnimationClass('')}
+  style={{width: '85%'}}
+>
+
                                 <div className={styles.cardContent}
                                      style={typeof cards[currentSlide].price === "string" ? {overflowY: 'auto'} : {}}>
                                     <div className={styles.titlePrice}>
