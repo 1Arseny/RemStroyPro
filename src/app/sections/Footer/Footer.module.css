@@ -12,10 +12,11 @@
     color: white;
     text-decoration: underline;
 }
-.link2{
-    margin-right: 30px;
+@media (min-width: 768px) {
+    .link2{
+        margin-right: 170px;
+    }
 }
-
 .images {
     display: flex;
     gap: 15px;

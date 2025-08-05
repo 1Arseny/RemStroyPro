@@ -39,7 +39,7 @@ function Footer() {
                 РемСтройПро. Строительство и ремонт под ключ
             </Link>
             <Link href="/" className={`${styles.link} ${styles.link2}`}>
-                © 2025 РемСтройПро. Все права защищены
+                © 2025 РемСтройПро. <br/>Все права защищены
             </Link>
             <div className={styles.images}>
                 {/* Телефон с выпадающим списком */}
