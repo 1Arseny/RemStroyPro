@@ -57,10 +57,10 @@ export const metadata: Metadata = {
     formatDetection: {
         telephone: true, // Включение обнаружения телефонных номеров
     },
-    verification: {
-        google: "KIcUFiXcnsCeWQmFNvD5b5HyrTyclTIhH_ar4WumjVw", // Код верификации Google
-        yandex: "5f955619b1e94acb", // Код верификации Yandex
-    },
+    // verification: {
+    //     google: "KIcUFiXcnsCeWQmFNvD5b5HyrTyclTIhH_ar4WumjVw", // Код верификации Google
+    //     yandex: "5f955619b1e94acb", // Код верификации Yandex
+    // },
 };
 
 export default function RootLayout({
