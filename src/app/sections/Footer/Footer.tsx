@@ -51,11 +51,23 @@ function Footer() {
                     <Image src={phoneIcon} alt="phone" width={40} height={40} className={styles.phoneIcon} />
                     {showDropdown && (
                         <div className={styles.dropdown}>
-                        {phoneNumbers.map((item, i) => (
-                            <a key={i} href={`tel:${item.number.replace(/[^0-9+]/g, '')}`}>
-                            {item.name}: {item.number}
-                            </a>
-                        ))}
+                            {phoneNumbers.map((item, i) => (
+                                <a
+                                    key={i}
+                                    href={`tel:${item.number.replace(/[^0-9+]/g, '')}`}
+                                    onClick={() => {
+                                        if (typeof window !== 'undefined' && typeof window.ym === 'function') {
+                                            if (item.name === 'Сергей') {
+                                                window.ym(103620695, 'reachGoal', 'phoneSerB');
+                                            } else if (item.name === 'Алексей') {
+                                                window.ym(103620695, 'reachGoal', 'phoneAlecB');
+                                            }
+                                        }
+                                    }}
+                                >
+                                    {item.name}: {item.number}
+                                </a>
+                            ))}
                         </div>
                     )}
                 </div>
