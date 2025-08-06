@@ -73,7 +73,7 @@ function Footer() {
                 </div>
                 {/* Telegram */}
                 <Link
-                    href="https://t.me/BuildConsultBot?start=FooterButton"
+                    href="https://t.me/remstroyprobot?start=FooterButton"
                     className={styles.iconLink}
                 >
                     <Image src={tg} alt="telegram" width={40} height={40} />

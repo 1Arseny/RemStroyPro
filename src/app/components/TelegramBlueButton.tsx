@@ -14,7 +14,7 @@ function TelegramBlueButton() {
 
     return (
         <Link
-            href="https://t.me/BuildConsultBot?start=BlueMain"
+            href="https://t.me/remstroyprobot?start=BlueMain"
             onClick={handleClick}
         >
             <div className={styles.button}>
