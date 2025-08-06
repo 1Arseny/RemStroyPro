@@ -882,7 +882,19 @@ export default function Calc() {
                     {showDropdown && (
                         <div className={styles.dropdown}>
                         {phoneNumbers.map((item, i) => (
-                            <a key={i} href={`tel:${item.number.replace(/[^0-9+]/g, '')}`}>
+                            <a
+                                key={i}
+                                href={`tel:${item.number.replace(/[^0-9+]/g, '')}`}
+                                onClick={() => {
+                                    if (typeof window !== 'undefined' && typeof window.ym === 'function') {
+                                        if (item.name === 'Сергей') {
+                                            window.ym(103620695, 'reachGoal', 'phoneS');
+                                        } else if (item.name === 'Алексей') {
+                                            window.ym(103620695, 'reachGoal', 'phoneAle');
+                                        }
+                                    }
+                                }}
+                            >
                                 {item.name}: {item.number}
                             </a>
                         ))}
